@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.*?>
+
+<GridPane prefHeight="257.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="loader.LoaderController">
+  <children>
+    <Pane fx:id="content" prefHeight="161.0" prefWidth="327.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <children>
+        <Button fx:id="loadPositive" layoutX="54.0" layoutY="33.0" mnemonicParsing="false" onAction="#LoadPositive" prefHeight="38.0" text="Cargar conjunto positivo" />
+        <Button fx:id="loadNegative" layoutX="54.0" layoutY="82.0" mnemonicParsing="false" onAction="#LoadNegative" prefHeight="38.0" prefWidth="151.0" text="Cargar conjunto negativo" textFill="#0029ff" />
+        <ProgressIndicator fx:id="progressPositive" layoutX="225.0" layoutY="33.0" progress="0.0" />
+        <ProgressIndicator layoutX="225.0" layoutY="82.0" progress="0.0" />
+        <Button fx:id="generateVocabulary" onAction="#GenerateVocabulary" layoutX="54.0" layoutY="207.0" mnemonicParsing="false" text="Generar Vocabulario" />
+      </children>
+    </Pane>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>
