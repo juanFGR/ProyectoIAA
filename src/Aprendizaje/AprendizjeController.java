@@ -1,88 +1,124 @@
-package loader;
+package Aprendizaje;
 
-import Aprendizaje.Aprendizaje;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import loader.Loader;
+import loader.LoaderController;
+import loader.Vocabulary;
 import main.BasicConstants;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.util.HashMap;
+import java.util.Set;
 
 
 /**
  * Created by JuanFGR on 02/05/2014.
  */
-public class LoaderController {
+public class AprendizjeController {
 
-    public class TypeOfCorpus {
-        public static final int CORPUSNEGATIVE = 0;
-        public static final int CORPUSPOSITIVE = 1;
+    public class TypeOfLoad {
+        public static final int LOADCORPUS = 0;
+        public static final int LOADVOCABULARY = 1;
     }
 
-Vocabulary vocabulary = new Vocabulary();
+
+    Vocabulary TreemapForcorpus = new Vocabulary();
 
     @FXML
     Pane content;
     @FXML
-    Button loadNegative,loadPositive,generateVocabulary;
+    Button loadNegative,loadCorpus,generateVocabulary;
     @FXML
     ProgressIndicator progressPositive;
 
-    @FXML
-    protected void gotoAprendizaje(ActionEvent event) throws IOException {
-        BasicConstants._vocabulary = getVocabulary();
-        new Aprendizaje();
-
-    }
-
-    public Vocabulary getVocabulary() {
-        return vocabulary;
-    }
+    File fileCorpus;
 
     @FXML
-    protected void GenerateVocabulary(ActionEvent event) throws FileNotFoundException {
+    protected void LoadPCorpus(ActionEvent event) throws FileNotFoundException {
+            System.out.println(BasicConstants._vocabulary._vocabularyMap.size());
+
+
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
-        File file = fileChooser.showOpenDialog(stage);
+         fileCorpus = fileChooser.showOpenDialog(stage);
 
-        FileReader fr = new FileReader(file.getAbsolutePath());
+        FileReader fr = new FileReader(fileCorpus.getAbsolutePath());
         BufferedReader br = new BufferedReader(fr);
         String aLine;
 
         try {
             while((aLine = br.readLine()) != null){
-               vocabulary.addToVocabulary(aLine);
+                TreemapForcorpus.addToVocabulary(aLine);
             }
 
-            vocabulary.printFile(file.getParent());
-
+            //vocabulary.printFile(file.getParent());
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-   //    vocabulary.printVector();
-        System.out.println("------------------------------>>>>>FIN DE VOCABULARIO");
+
+
     }
 
 
-    @FXML
-    protected void LoadPositive(ActionEvent event)  {
 
-        for (int i = 0; i < 50; i++) {
-            progressPositive.setProgress(i);
+   @FXML
+    protected void generateLearning(ActionEvent event)  {
+        System.out.println(BasicConstants._vocabulary._vocabularyMap.size());
+       System.out.println(TreemapForcorpus._vocabularyMap.size());
+
+       Set<String> listOfKeys = BasicConstants._vocabulary._vocabularyMap.keySet();
+
+    double Prob = 0;
+
+       FileWriter fileWritter = null;
+       try {
+           fileWritter = new FileWriter(fileCorpus.getParent() + "\\Aprendizaje", true);
+           BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+
+
+           for (int it=0;it<listOfKeys.size();it++) {
+               if(TreemapForcorpus._vocabularyMap.containsKey(listOfKeys.toArray()[it])){
+                   Prob = Math.log1p(TreemapForcorpus._vocabularyMap.get(listOfKeys.toArray()[it])/(TreemapForcorpus._vocabularyMap.size()+countWords(listOfKeys)));
+                   try {
+                       bufferWritter.write("Palabra:"+listOfKeys.toArray()[it]+" Frec:"+   TreemapForcorpus._vocabularyMap.get(listOfKeys.toArray()[it])+" LogProb"+Prob+"\n");
+                   } catch (IOException e) {
+                       e.printStackTrace();
+                   }
+               }
+           }
+           bufferWritter.close();
+
+
+
+       }catch (IOException e) {
+           e.printStackTrace();
+       }
+
+
+
+
+    }
+
+
+
+
+    private Integer countWords(Set<String> listOfKeys) {
+        int cont=0;
+        for (String it:listOfKeys) {
+            cont += BasicConstants._vocabulary._vocabularyMap.get(it);
         }
-
-    directoryFunctionForLoadCorpus(TypeOfCorpus.CORPUSPOSITIVE);
+        return cont;
     }
 
     private void directoryFunctionForLoadCorpus(int typeOfCorpus) {
@@ -93,15 +129,13 @@ Vocabulary vocabulary = new Vocabulary();
         directoryChooser.setInitialDirectory(defaultDirectory);
         File selectedDirectory = directoryChooser.showDialog(stage);
 
-
-
         if (selectedDirectory != null) {
             File[] listOfFiles = selectedDirectory.listFiles();
             try {
                 String nameOfCorpus = null;
-                if (typeOfCorpus == TypeOfCorpus.CORPUSPOSITIVE){
+                if (typeOfCorpus == TypeOfLoad.LOADCORPUS){
                     nameOfCorpus = selectedDirectory.getParent() + "\\corpusPos";
-                }else if (typeOfCorpus == TypeOfCorpus.CORPUSNEGATIVE){
+                }else if (typeOfCorpus == TypeOfLoad.LOADCORPUS){
                     nameOfCorpus = selectedDirectory.getParent() + "\\corpusNeg";
                 }
 
@@ -131,7 +165,7 @@ Vocabulary vocabulary = new Vocabulary();
 
     @FXML
     protected void LoadNegative(ActionEvent event) {
-        directoryFunctionForLoadCorpus(TypeOfCorpus.CORPUSNEGATIVE);
+    //    directoryFunctionForLoadCorpus(TypeOfCorpus.CORPUSNEGATIVE);
 
     }
 
