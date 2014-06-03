@@ -1,4 +1,4 @@
-package aprendizaje;/**
+package clasificacion;/**
  * Created by JuanFGR on 02/05/2014.
  */
 
@@ -9,15 +9,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Aprendizaje {
+public class Clasificacion {
 
 
 
 
 
-        public Aprendizaje() throws IOException {
+        public Clasificacion() throws IOException {
 
-        Parent root = FXMLLoader.load(AprendizjeController.class.getResource("Aprendizaje.fxml"));
+        Parent root = FXMLLoader.load(ClasificacionController.class.getResource("Clasificacion.fxml"));
         Stage stage = new Stage();
         stage.setTitle("APRENDIZAJE");
         stage.setScene(new Scene(root, 300, 275));

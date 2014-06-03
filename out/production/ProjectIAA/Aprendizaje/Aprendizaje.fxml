@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane prefHeight="257.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Aprendizaje.AprendizjeController">
+<GridPane prefHeight="257.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="aprendizaje.AprendizjeController">
   <children>
     <Pane fx:id="content" prefHeight="204.0" prefWidth="327.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>

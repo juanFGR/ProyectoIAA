@@ -1,4 +1,4 @@
-package aprendizaje;
+package clasificacion;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ import java.util.Set;
 /**
  * Created by JuanFGR on 02/05/2014.
  */
-public class AprendizjeController {
+public class ClasificacionController {
 
     public class TypeOfLoad {
         public static final int LOADCORPUSPOSITIVE = 0;

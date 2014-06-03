@@ -1,10 +1,9 @@
 package loader;
 
-import Aprendizaje.Aprendizaje;
+import aprendizaje.Aprendizaje;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
@@ -14,7 +13,6 @@ import main.BasicConstants;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.util.HashMap;
 
 
 /**
