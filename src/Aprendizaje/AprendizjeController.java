@@ -1,5 +1,6 @@
 package aprendizaje;
 
+import clasificacion.Clasificacion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -58,10 +59,6 @@ public class AprendizjeController {
             while((aLine = br.readLine()) != null){
                 TreemapForcorpus_Pos.addToVocabulary(aLine);
             }
-
-            //vocabulary.printFile(file.getParent());
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,6 +66,11 @@ public class AprendizjeController {
 
     }
 
+
+    @FXML
+    protected void goToClasificacion(ActionEvent event)throws IOException{
+        new Clasificacion();
+    }
 
 
    @FXML

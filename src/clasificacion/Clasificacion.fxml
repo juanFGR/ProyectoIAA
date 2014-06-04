@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+
 <GridPane prefHeight="257.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="aprendizaje.AprendizjeController">
   <children>
-    <Pane fx:id="content" prefHeight="204.0" prefWidth="327.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+    <Pane fx:id="content" prefHeight="162.0" prefWidth="294.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
-        <Button fx:id="loadCorpus" onAction="#LoadPCorpus" layoutX="54.0" layoutY="33.0" mnemonicParsing="false"  prefHeight="24.0" prefWidth="146.0" text="Cargar corpus positivo" />
-        <Button onAction="#LoadPCorpus" layoutX="54.0" layoutY="71.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="146.0" text="Cargar Corpus Negativo" />
-        <Button fx:id="loadVocabulary" layoutX="54.0" layoutY="129.0" minHeight="18.5" mnemonicParsing="false" onAction="#LoadNegative" prefHeight="24.0" prefWidth="146.0" text="Cargar vocabulario" textFill="#0029ff" />
-        <ProgressIndicator fx:id="progressPositive" layoutX="250.0" layoutY="33.0" progress="0.0" />
-        <ProgressIndicator layoutX="250.0" layoutY="82.0" progress="0.0" />
-        <Button fx:id="Learning" layoutX="186.0" layoutY="205.0" mnemonicParsing="false" onAction="#generateLearning" prefHeight="38.0" text="Generar Aprendizaje" />
+        <Button fx:id="loadCorpus" layoutX="18.0" layoutY="26.0" mnemonicParsing="false" onAction="#LoadPCorpus" prefHeight="24.0" prefWidth="146.0" text="Cargar corpus" />
+        <Button layoutX="18.0" layoutY="63.0" mnemonicParsing="false" onAction="#LoadPCorpus" prefHeight="24.0" prefWidth="146.0" text="Aprendizaje Positivo" />
+        <Button fx:id="loadVocabulary" layoutX="18.0" layoutY="105.0" minHeight="18.5" mnemonicParsing="false" onAction="#LoadNegative" prefHeight="24.0" prefWidth="146.0" text="Aprendizaje Negativo" textFill="BLACK" />
+        <Button fx:id="Learning" layoutX="149.0" layoutY="205.0" mnemonicParsing="false" onAction="#generateLearning" prefHeight="38.0" text="Generar Clasificacion" textFill="#00993d" />
       </children>
     </Pane>
   </children>

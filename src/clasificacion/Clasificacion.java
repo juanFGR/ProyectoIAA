@@ -19,7 +19,7 @@ public class Clasificacion {
 
         Parent root = FXMLLoader.load(ClasificacionController.class.getResource("Clasificacion.fxml"));
         Stage stage = new Stage();
-        stage.setTitle("APRENDIZAJE");
+        stage.setTitle("CLASIFICACION");
         stage.setScene(new Scene(root, 300, 275));
         stage.show();
 
