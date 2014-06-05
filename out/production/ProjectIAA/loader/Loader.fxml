@@ -13,12 +13,13 @@
   <children>
     <Pane fx:id="content" prefHeight="161.0" prefWidth="327.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
-        <Button fx:id="loadPositive" layoutX="54.0" layoutY="33.0" mnemonicParsing="false" onAction="#LoadPositive" prefHeight="38.0" text="Cargar conjunto positivo" />
-        <Button fx:id="loadNegative" layoutX="54.0" layoutY="82.0" mnemonicParsing="false" onAction="#LoadNegative" prefHeight="38.0" prefWidth="151.0" text="Cargar conjunto negativo" textFill="#0029ff" />
+        <Button fx:id="loadPositive" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#LoadPositive" prefHeight="38.0" text="Cargar conjunto positivo" />
+        <Button fx:id="loadNegative" layoutX="14.0" layoutY="82.0" mnemonicParsing="false" onAction="#LoadNegative" prefHeight="38.0" prefWidth="151.0" text="Cargar conjunto negativo" textFill="BLACK" />
         <ProgressIndicator fx:id="progressPositive" layoutX="225.0" layoutY="33.0" progress="0.0" />
-        <ProgressIndicator layoutX="225.0" layoutY="82.0" progress="0.0" />
-        <Button fx:id="generateVocabulary" layoutX="54.0" layoutY="207.0" mnemonicParsing="false" onAction="#GenerateVocabulary" text="Generar Vocabulario" />
-        <Button layoutX="225.0"  onAction="#gotoAprendizaje" layoutY="207.0" mnemonicParsing="false" text="Aprendizaje" />
+        <ProgressIndicator fx:id="progressNegative" layoutX="225.0" layoutY="82.0" progress="0.0" />
+        <Button fx:id="generateVocabulary" layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#GenerateVocabulary" prefHeight="38.0" prefWidth="151.0" text="Generar Vocabulario" />
+        <Button layoutX="187.0" layoutY="205.0" minHeight="15.9609375" mnemonicParsing="false" onAction="#gotoAprendizaje" prefHeight="38.0" prefWidth="114.0" text="Aprendizaje" />
+        <ProgressIndicator fx:id="vocabularyLoaded"  layoutX="225.0" layoutY="129.0" progress="0.0" />
       </children>
     </Pane>
   </children>

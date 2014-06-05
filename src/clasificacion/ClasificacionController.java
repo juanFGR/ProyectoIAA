@@ -14,6 +14,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.util.Set;
+import java.util.TreeMap;
 
 
 /**
@@ -22,26 +23,74 @@ import java.util.Set;
 public class ClasificacionController {
 
     public class TypeOfLoad {
-        public static final int LOADCORPUSPOSITIVE = 0;
-        public static final int LOADCORPUSNEGATIVE = 1;
-        public static final int LOADVOCABULARY = 2;
+        public static final int LEARNPOSITIVE = 0;
+        public static final int LEARNNEGATIVE = 1;
+        public static final int LOADCORPUS = 2;
     }
 
+    public static final String DESCONOCIDO = "<UNK>";
+    TreeMap<String, String> Treemappos = new TreeMap<String, String>();
+    TreeMap<String, String> Treemapneg = new TreeMap<String, String>();
+    String selectedDirectory;
 
-    Vocabulary TreemapForcorpus_Pos = new Vocabulary();
-    Vocabulary TreemapForcorpus_Neg = new Vocabulary();
+    @FXML    Pane content;
+    @FXML      ProgressIndicator progressLoadCorpus,progressLoadAprendizajePOS,progressLoadAprendizajeNEG;
 
-    @FXML
-    Pane content;
-    @FXML
-    Button loadNegative,loadCorpus,generateVocabulary;
-    @FXML
-    ProgressIndicator progressPositive;
-
-    File fileCorpus;
+    File fileCorpus, fileLearnPositive, fileLearnNegative;
 
     @FXML
-    protected void LoadPCorpus(ActionEvent event) throws FileNotFoundException {
+    protected void LoadLearnPositive (ActionEvent event)throws FileNotFoundException{
+        Stage stage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileLearnPositive = fileChooser.showOpenDialog(stage);
+
+        selectedDirectory = fileLearnPositive.getParent();
+        System.out.println("--->"+selectedDirectory);
+        FileReader fr = new FileReader(fileLearnPositive.getAbsolutePath());
+        BufferedReader br = new BufferedReader(fr);
+        String aLine;
+        String [] colum;
+
+        try {
+            while((aLine = br.readLine()) != null){
+                colum = aLine.split(" ");
+                Treemappos.put(colum[0].split(":")[1], colum[2].split(":")[1]);
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        progressLoadAprendizajePOS.setProgress(100);
+
+    }
+
+    @FXML
+    protected void LoadLearnNegative (ActionEvent event)throws FileNotFoundException{
+        Stage stage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileLearnNegative = fileChooser.showOpenDialog(stage);
+
+        FileReader fr = new FileReader(fileLearnNegative.getAbsolutePath());
+        BufferedReader br = new BufferedReader(fr);
+        String aLine, colum[];
+
+        try {
+            while((aLine = br.readLine()) != null){
+                colum = aLine.split(" ");
+                Treemapneg.put(colum[0].split(":")[1], colum[2].split(":")[1]);
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        progressLoadAprendizajeNEG.setProgress(100);
+
+    }
+
+    @FXML
+    protected void LoadCorpusandClassify(ActionEvent event) throws FileNotFoundException {
             System.out.println(BasicConstants._vocabulary._vocabularyMap.size());
 
 
@@ -52,119 +101,51 @@ public class ClasificacionController {
 
         FileReader fr = new FileReader(fileCorpus.getAbsolutePath());
         BufferedReader br = new BufferedReader(fr);
-        String aLine;
+        String aLine, words[], clase;
+        double probPos = 0.0, probNeg = 0.0;
 
         try {
+            //Escribiendo el fichero de clasificación
+            FileWriter fileWritter = new FileWriter(selectedDirectory + "\\clasificacion",true);
+            BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+            String nameOfCorpus = selectedDirectory + "\\clasificacion";
+            PrintWriter writer = new PrintWriter(nameOfCorpus, "UTF-8");
+            System.out.println(nameOfCorpus);
             while((aLine = br.readLine()) != null){
-                TreemapForcorpus_Pos.addToVocabulary(aLine);
-            }
-
-            //vocabulary.printFile(file.getParent());
-
+                //TreemapForcorpus_Pos.addToVocabulary(aLine);
+                aLine = aLine.split(":")[1];
+                words = aLine.split(" ");
+                probNeg = probPos = 0.0;
+                //Calculo de Probabilidades
+                for (String palabra: words) {
+                    if(Treemappos.containsKey(palabra)) {
+                        probPos += Double.parseDouble(Treemappos.get(palabra));
+                    }
+                    else {
+                        probPos += Double.parseDouble(Treemappos.get(DESCONOCIDO));
+                    }//else
+                    if(Treemapneg.containsKey(palabra)) {
+                        probNeg += Double.parseDouble(Treemapneg.get(palabra));
+                    }
+                    else {
+                        probNeg += Double.parseDouble(Treemapneg.get(DESCONOCIDO));
+                    }//else
+                }//for
+                if (Math.max(probPos, probNeg) == probPos) {
+                    clase = "pos";
+                }//if
+                else {
+                    clase = "neg";
+                }//else
+                writer.println("Clase: "+ clase + " Texto: " + aLine);
+            }//while
+            writer.close();
+            br.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-    }
-
-
-
-   @FXML
-    protected void generateLearning(ActionEvent event)  {
-        System.out.println(BasicConstants._vocabulary._vocabularyMap.size());
-       System.out.println(TreemapForcorpus_Pos._vocabularyMap.size());
-
-       Set<String> listOfKeys = BasicConstants._vocabulary._vocabularyMap.keySet();
-
-    double Prob = 0;
-
-       FileWriter fileWritter = null;
-       try {
-           fileWritter = new FileWriter(fileCorpus.getParent() + "\\Aprendizaje", true);
-           BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-
-
-           for (int it=0;it<listOfKeys.size();it++) {
-               if(TreemapForcorpus_Pos._vocabularyMap.containsKey(listOfKeys.toArray()[it])){
-                   Prob = Math.log1p(TreemapForcorpus_Pos._vocabularyMap.get(listOfKeys.toArray()[it])/(TreemapForcorpus_Pos._vocabularyMap.size()+countWords(listOfKeys)));
-                   try {
-                       bufferWritter.write("Palabra:"+listOfKeys.toArray()[it]+" Frec:"+   TreemapForcorpus_Pos._vocabularyMap.get(listOfKeys.toArray()[it])+" LogProb"+Prob+"\n");
-                   } catch (IOException e) {
-                       e.printStackTrace();
-                   }
-               }
-           }
-           bufferWritter.close();
-
-
-
-       }catch (IOException e) {
-           e.printStackTrace();
-       }
-
-
-
-
-    }
-
-
-
-
-    private Integer countWords(Set<String> listOfKeys) {
-        int cont=0;
-        for (String it:listOfKeys) {
-            cont += BasicConstants._vocabulary._vocabularyMap.get(it);
-        }
-        return cont;
-    }
-
-    private void directoryFunctionForLoadCorpus(int typeOfCorpus) {
-        Stage stage = new Stage();
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Open Resource File");
-        File defaultDirectory = new File("c:/");
-        directoryChooser.setInitialDirectory(defaultDirectory);
-        File selectedDirectory = directoryChooser.showDialog(stage);
-
-        if (selectedDirectory != null) {
-            File[] listOfFiles = selectedDirectory.listFiles();
-            try {
-                String nameOfCorpus = null;
-                if (typeOfCorpus == TypeOfLoad.LOADCORPUSPOSITIVE){
-                    nameOfCorpus = selectedDirectory.getParent() + "\\corpusPos";
-                }else if (typeOfCorpus == TypeOfLoad.LOADCORPUSNEGATIVE){
-                    nameOfCorpus = selectedDirectory.getParent() + "\\corpusNeg";
-                }
-
-                FileWriter fileWritter = new FileWriter(selectedDirectory.getParent()+ "\\corpusTodo",true);
-                BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-
-
-                PrintWriter writer = new PrintWriter(nameOfCorpus, "UTF-8");
-
-                for (int i = 0; i < listOfFiles.length; i++) {
-                    File file = listOfFiles[i];
-                    if (file.isFile() && file.getName().endsWith(".txt")) {
-                        try {
-                            String content = FileUtils.readFileToString(file);
-                            writer.println("Texto: " + content);
-                            bufferWritter.write("Texto: " + content + "\n");
-
-                        } catch (Exception e){}
-                    }
-                }
-                writer.close();
-                bufferWritter.close();
-            } catch (Exception e){}
-        }
-    }
-
-
-    @FXML
-    protected void LoadNegative(ActionEvent event) {
-    //    directoryFunctionForLoadCorpus(TypeOfCorpus.CORPUSNEGATIVE);
+        progressLoadCorpus.setProgress(100);
 
     }
 

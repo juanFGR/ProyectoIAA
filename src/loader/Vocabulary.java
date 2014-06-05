@@ -24,12 +24,16 @@ public class Vocabulary {
        }
    }
 
-    public static final String REG_EXP = "(\\W)|(' '*)";
+    public static final String REG_EXP = "(\\W)";
 
     public void addToVocabulary(String line){
         String [] buff = line.split(" ");
+        String stringTmp = null;
         for (int i = 1; i < buff.length; i++) {
-            addWord(buff[i].replaceAll(REG_EXP,""));
+            stringTmp = buff[i].replaceAll(REG_EXP,"").replaceAll("\\s+","").replaceAll("_+","");
+            if(stringTmp.length()>0 && !stringTmp.contains(" "))
+                addWord(buff[i].replaceAll(REG_EXP,"").replaceAll("\\s+","").replaceAll("_+",""));
+
         }
     }
 
@@ -51,7 +55,8 @@ public class Vocabulary {
             Set<String> keySet =  _vocabularyMap.keySet();
             for (String word:keySet) {
                         try {
-                            bufferWritter.write("Palabra: "+word+"\n");
+                            if (!word.contains(" "))
+                                bufferWritter.write("Palabra: "+word+"\n");
                         } catch (Exception e){}
             }
             bufferWritter.close();

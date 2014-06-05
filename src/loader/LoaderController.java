@@ -25,21 +25,27 @@ public class LoaderController {
         public static final int CORPUSPOSITIVE = 1;
     }
 
-Vocabulary vocabulary = new Vocabulary();
+    Vocabulary vocabulary = new Vocabulary();
+
+    @FXML Pane content;
+    @FXML Button loadNegative,loadPositive,generateVocabulary;
+    @FXML ProgressIndicator progressPositive,progressNegative,vocabularyLoaded;
+
 
     @FXML
-    Pane content;
-    @FXML
-    Button loadNegative,loadPositive,generateVocabulary;
-    @FXML
-    ProgressIndicator progressPositive;
-
-    @FXML
-    protected void gotoAprendizaje(ActionEvent event) throws IOException {
-        BasicConstants._vocabulary = getVocabulary();
-        new Aprendizaje();
-
+    protected void LoadPositive(ActionEvent event)  {
+        directoryFunctionForLoadCorpus(TypeOfCorpus.CORPUSPOSITIVE);
+        progressPositive.setProgress(100);
     }
+
+    @FXML
+    protected void LoadNegative(ActionEvent event) {
+        directoryFunctionForLoadCorpus(TypeOfCorpus.CORPUSNEGATIVE);
+        progressNegative.setProgress(100);
+    }
+
+
+
 
     public Vocabulary getVocabulary() {
         return vocabulary;
@@ -68,26 +74,26 @@ Vocabulary vocabulary = new Vocabulary();
         } catch (IOException e) {
             e.printStackTrace();
         }
-   //    vocabulary.printVector();
-        System.out.println("------------------------------>>>>>FIN DE VOCABULARIO");
+        vocabularyLoaded.setProgress(100);
+
     }
+
 
 
     @FXML
-    protected void LoadPositive(ActionEvent event)  {
+    protected void gotoAprendizaje(ActionEvent event) throws IOException {
+        BasicConstants._vocabulary = getVocabulary();
+        new Aprendizaje();
 
-        for (int i = 0; i < 50; i++) {
-            progressPositive.setProgress(i);
-        }
-
-    directoryFunctionForLoadCorpus(TypeOfCorpus.CORPUSPOSITIVE);
     }
+
+
 
     private void directoryFunctionForLoadCorpus(int typeOfCorpus) {
         Stage stage = new Stage();
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Open Resource File");
-        File defaultDirectory = new File("c:/");
+        File defaultDirectory = new File("C:/Users/juanfrancisco/Desktop/Corpus");
         directoryChooser.setInitialDirectory(defaultDirectory);
         File selectedDirectory = directoryChooser.showDialog(stage);
 
@@ -127,10 +133,7 @@ Vocabulary vocabulary = new Vocabulary();
     }
 
 
-    @FXML
-    protected void LoadNegative(ActionEvent event) {
-        directoryFunctionForLoadCorpus(TypeOfCorpus.CORPUSNEGATIVE);
 
-    }
+
 
 }
