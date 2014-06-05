@@ -55,7 +55,7 @@ public class LoaderController {
     protected void GenerateVocabulary(ActionEvent event) throws FileNotFoundException {
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
+        fileChooser.setTitle("Load Corpus to Build Vocabulary");
         File file = fileChooser.showOpenDialog(stage);
 
         FileReader fr = new FileReader(file.getAbsolutePath());
@@ -90,10 +90,19 @@ public class LoaderController {
 
 
     private void directoryFunctionForLoadCorpus(int typeOfCorpus) {
+    	  
+    	  String conjunto = "";
+    	
+    	  if (typeOfCorpus == TypeOfCorpus.CORPUSPOSITIVE){
+          conjunto = "Positive";
+        }else if (typeOfCorpus == TypeOfCorpus.CORPUSNEGATIVE){
+          conjunto = "Negative";
+        }
+    	  
         Stage stage = new Stage();
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Open Resource File");
-        File defaultDirectory = new File("C:/Users/juanfrancisco/Desktop/Corpus");
+        directoryChooser.setTitle("Load " + conjunto + " Set");
+        File defaultDirectory = new File("ficheros/");
         directoryChooser.setInitialDirectory(defaultDirectory);
         File selectedDirectory = directoryChooser.showDialog(stage);
 

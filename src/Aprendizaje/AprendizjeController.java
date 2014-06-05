@@ -101,7 +101,7 @@ public class AprendizjeController {
             for (int it=0;it<listOfKeys.size()/100;it++) {
                 //------------POSITIVO--------------------
                 if(TreemapForcorpus_Pos._vocabularyMap.containsKey(bufferValues[it])){
-                    Prob = Math.log10(TreemapForcorpus_Pos._vocabularyMap.get(bufferValues[it])+1/(TreemapForcorpus_Pos._vocabularyMap.size()+countWords(listOfKeys)));
+                    Prob = Math.log10((double)TreemapForcorpus_Pos._vocabularyMap.get(bufferValues[it])+1/(double)(TreemapForcorpus_Pos._vocabularyMap.size()+countWords(listOfKeys)));
                     try {
                         bufferWriterPos.write("Palabra:"+bufferValues[it]+" Frec:"+   TreemapForcorpus_Pos._vocabularyMap.get(bufferValues[it])+" LogProb:"+Prob+"\n");
                     } catch (IOException e) {
@@ -113,7 +113,7 @@ public class AprendizjeController {
                 } //else
 
             }//for
-            Prob = unk/(TreemapForcorpus_Pos._vocabularyMap.size()+countWords(listOfKeys));
+            Prob = Math.log10((double)(unk+1)/(double)(TreemapForcorpus_Pos._vocabularyMap.size()+countWords(listOfKeys)));
             bufferWriterPos.write("Palabra:<UNK> Frec:" + unk + " Prob:"+Prob);
             bufferWriterPos.close();
 
@@ -125,7 +125,7 @@ public class AprendizjeController {
 
             for (int it=0;it<listOfKeys.size()/100;it++) {
                 if(TreemapForcorpus_Neg._vocabularyMap.containsKey(bufferValues[it])){
-                    Prob = Math.log10(TreemapForcorpus_Neg._vocabularyMap.get(bufferValues[it])+1/(TreemapForcorpus_Neg._vocabularyMap.size()+countWords(listOfKeys)));
+                    Prob = Math.log10((double)TreemapForcorpus_Neg._vocabularyMap.get(bufferValues[it])+1/(double)(TreemapForcorpus_Neg._vocabularyMap.size()+countWords(listOfKeys)));
                     try {
                         bufferWriterNeg.write("Palabra:"+bufferValues[it]+" Frec:"+   TreemapForcorpus_Neg._vocabularyMap.get(bufferValues[it])+" LogProb:"+Prob+"\n");
                     } catch (IOException e) {
@@ -137,7 +137,7 @@ public class AprendizjeController {
                 }//else
 
             }//for
-            Prob = unk/(TreemapForcorpus_Pos._vocabularyMap.size()+countWords(listOfKeys));
+            Prob = Math.log10((double)(unk+1)/(double)(TreemapForcorpus_Pos._vocabularyMap.size()+countWords(listOfKeys)));
             bufferWriterNeg.write("Palabra:<UNK> Frec:" + unk + " Prob:"+Prob);
             bufferWriterNeg.close();
 
@@ -165,7 +165,7 @@ public class AprendizjeController {
         Stage stage = new Stage();
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Open Resource File");
-        File defaultDirectory = new File("C:/Users/juanfrancisco/Desktop/Corpus");
+        File defaultDirectory = new File("ficheros/");
         directoryChooser.setInitialDirectory(defaultDirectory);
         File selectedDirectory = directoryChooser.showDialog(stage);
 

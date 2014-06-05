@@ -14,6 +14,7 @@
         <ProgressIndicator fx:id="progressLoadCorpus" layoutX="190.0" layoutY="126.0" progress="0.0" />
         <ProgressIndicator fx:id="progressLoadAprendizajePOS" layoutX="190.0" layoutY="18.0" progress="0.0" />
         <ProgressIndicator fx:id="progressLoadAprendizajeNEG" layoutX="190.0" layoutY="69.0" progress="0.0" />
+        <Button onAction="#goToEvaluation" layoutX="203.0" layoutY="216.0" mnemonicParsing="false" text="Evaluacion" />
       </children>
     </Pane>
   </children>

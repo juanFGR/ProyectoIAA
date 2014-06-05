@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import loader.Vocabulary;
 import main.BasicConstants;
 import org.apache.commons.io.FileUtils;
+import validacion.Validacion;
 
 import java.io.*;
 import java.util.Set;
@@ -38,11 +39,17 @@ public class ClasificacionController {
 
     File fileCorpus, fileLearnPositive, fileLearnNegative;
 
+
+    @FXML
+    protected void goToEvaluation(ActionEvent event) throws IOException {
+        new Validacion();
+    }
+
     @FXML
     protected void LoadLearnPositive (ActionEvent event)throws FileNotFoundException{
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
+        fileChooser.setTitle("Load Positive Learning");
         fileLearnPositive = fileChooser.showOpenDialog(stage);
 
         selectedDirectory = fileLearnPositive.getParent();
@@ -69,7 +76,7 @@ public class ClasificacionController {
     protected void LoadLearnNegative (ActionEvent event)throws FileNotFoundException{
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
+        fileChooser.setTitle("Load Negative Learning");
         fileLearnNegative = fileChooser.showOpenDialog(stage);
 
         FileReader fr = new FileReader(fileLearnNegative.getAbsolutePath());
@@ -96,7 +103,7 @@ public class ClasificacionController {
 
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
+        fileChooser.setTitle("Load corpus to classify");
          fileCorpus = fileChooser.showOpenDialog(stage);
 
         FileReader fr = new FileReader(fileCorpus.getAbsolutePath());

@@ -9,23 +9,25 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<GridPane fx:id="root" alignment="CENTER" hgap="10.0" opacity="0.48" prefHeight="250.0" prefWidth="357.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.Controller">
+<GridPane fx:id="root" alignment="CENTER" hgap="10.0" opacity="0.48" prefHeight="250.0" prefWidth="357.0" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
   </rowConstraints>
-  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
-    <children>
-      <ProgressIndicator layoutX="14.0" layoutY="194.0" prefHeight="42.0" prefWidth="33.0" progress="0.0" />
-      <Label fx:id="jj" layoutX="141.0" layoutY="23.0" text="Proyecto Final" textFill="#0c0099">
-        <font>
-          <Font size="16.0" />
-        </font>
-      </Label>
-      <Button layoutX="287.0" fx:id="ee" layoutY="194.0" mnemonicParsing="false" onAction="#ee"  text="Entrar" />
-
-    </children>
-  </Pane>
+   <children>
+     <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+       <children>
+         <ProgressIndicator layoutX="14.0" layoutY="194.0" prefHeight="42.0" prefWidth="33.0" progress="0.0" />
+         <Label fx:id="jj" layoutX="141.0" layoutY="23.0" text="Proyecto Final" textFill="#0c0099">
+           <font>
+             <Font size="16.0" />
+           </font>
+         </Label>
+         <Button fx:id="ee" layoutX="167.0" layoutY="194.0" mnemonicParsing="false" onAction="#ee" text="Entrar" />
+   
+       </children>
+     </Pane>
+   </children>
 </GridPane>

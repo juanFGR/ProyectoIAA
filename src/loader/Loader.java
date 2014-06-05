@@ -22,7 +22,7 @@ public Loader() throws IOException {
 
         Parent root = FXMLLoader.load(LoaderController.class.getResource("Loader.fxml"));
         Stage stage = new Stage();
-        stage.setTitle("Hello World");
+        stage.setTitle("Generar Vocabulario");
         stage.setScene(new Scene(root, 300, 275));
         stage.show();
 
