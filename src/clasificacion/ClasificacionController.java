@@ -70,6 +70,7 @@ public class ClasificacionController {
             while((aLine = br.readLine()) != null){
                 colum = aLine.split(" ");
                 Treemappos.put(colum[0].split(":")[1], colum[2].split(":")[1]);
+               // System.out.println("POSITIVE---->"+colum[2].split(":")[1]);
             }
             br.close();
         } catch (IOException e) {
@@ -94,6 +95,7 @@ public class ClasificacionController {
             while((aLine = br.readLine()) != null){
                 colum = aLine.split(" ");
                 Treemapneg.put(colum[0].split(":")[1], colum[2].split(":")[1]);
+                System.out.println("NEGATIVE---->"+colum[2].split(":")[1]);
             }
             br.close();
         } catch (IOException e) {
@@ -116,7 +118,7 @@ public class ClasificacionController {
         FileReader fr = new FileReader(fileCorpus.getAbsolutePath());
         BufferedReader br = new BufferedReader(fr);
         String aLine, words[], clase;
-        double probPos = 0.0, probNeg = 0.0;
+        double   probPos = 0.0, probNeg = 0.0;
 
         try {
             //Escribiendo el fichero de clasificación
@@ -144,7 +146,11 @@ public class ClasificacionController {
                     else {
                         probNeg += Double.parseDouble(Treemapneg.get(DESCONOCIDO));
                     }//else
+                    //Sumadas probabilidades de la clase
                 }//for
+                probPos += BasicConstants.probpos;
+                probNeg += BasicConstants.probneg;
+
                 if (Math.max(probPos, probNeg) == probPos) {
                     clase = "pos";
                 }//if

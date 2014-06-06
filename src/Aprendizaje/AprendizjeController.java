@@ -119,50 +119,49 @@ public class AprendizjeController {
             BufferedWriter bufferWriterPos = new BufferedWriter(fileWriterPos);
 
             Object [] bufferValues = listOfKeys.toArray();
-            for (int it=0;it<listOfKeys.size()/100;it++) {
+            int size = TreemapForcorpus_Pos._vocabularyMap.size();
+            int numberOfWords = countWords(listOfKeys);
+
+            for (int it=0;it<listOfKeys.size();it++) {
                 //------------POSITIVO--------------------
                 if(TreemapForcorpus_Pos._vocabularyMap.containsKey(bufferValues[it])){
-                    Prob = Math.log10((double)TreemapForcorpus_Pos._vocabularyMap.get(bufferValues[it])+1/(double)(TreemapForcorpus_Pos._vocabularyMap.size()+countWords(listOfKeys)));
+                    Prob = Math.log10((double)TreemapForcorpus_Pos._vocabularyMap.get(bufferValues[it])+1/(double)(size+numberOfWords));
                     try {
                         bufferWriterPos.write("Palabra:"+bufferValues[it]+" Frec:"+   TreemapForcorpus_Pos._vocabularyMap.get(bufferValues[it])+" LogProb:"+Prob+"\n");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 } //if POS
-                else {
-                    unk++;
-                } //else
-
             }//for
-            Prob = Math.log10((double)(unk+1)/(double)(TreemapForcorpus_Pos._vocabularyMap.size()+countWords(listOfKeys)));
-            bufferWriterPos.write("Palabra:<UNK> Frec:" + unk + " Prob:"+Prob);
+            Prob = Math.log10((double)(1.0)/(double)(TreemapForcorpus_Pos._vocabularyMap.size()+countWords(listOfKeys)));
+
+            bufferWriterPos.write("Palabra:<UNK> Frec:1" + " LogProb:" + Prob);
             bufferWriterPos.close();
 
+            //-----------------------------------------
             //------------NEGATIVO--------------------
+            //-----------------------------------------
             Prob = 0.0;
-            unk = 0;
             fileWriterNeg = new FileWriter(fileCorpus.getParent() + "\\Aprendizajeneg", true);
             BufferedWriter bufferWriterNeg = new BufferedWriter(fileWriterNeg);
 
-            for (int it=0;it<listOfKeys.size()/100;it++) {
+            size = TreemapForcorpus_Neg._vocabularyMap.size();
+            numberOfWords = countWords(listOfKeys);
+            for (int it=0;it<listOfKeys.size();it++) {
                 if(TreemapForcorpus_Neg._vocabularyMap.containsKey(bufferValues[it])){
-                    Prob = Math.log10((double)TreemapForcorpus_Neg._vocabularyMap.get(bufferValues[it])+1/(double)(TreemapForcorpus_Neg._vocabularyMap.size()+countWords(listOfKeys)));
+                    Prob = Math.log10((double)TreemapForcorpus_Neg._vocabularyMap.get(bufferValues[it])+1/(double)(size+numberOfWords));
                     try {
                         bufferWriterNeg.write("Palabra:"+bufferValues[it]+" Frec:"+   TreemapForcorpus_Neg._vocabularyMap.get(bufferValues[it])+" LogProb:"+Prob+"\n");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }//if NEG
-                else{
-                    unk++;
-                }//else
 
             }//for
-            Prob = Math.log10((double)(unk+1)/(double)(TreemapForcorpus_Pos._vocabularyMap.size()+countWords(listOfKeys)));
-            bufferWriterNeg.write("Palabra:<UNK> Frec:" + unk + " Prob:"+Prob);
+            Prob = Math.log10((double)(1.0)/(double)(TreemapForcorpus_Neg._vocabularyMap.size()+countWords(listOfKeys)));
+
+            bufferWriterNeg.write("Palabra:<UNK> Frec:1" + " LogProb:" + Prob);
             bufferWriterNeg.close();
-
-
             //try
         }catch (IOException e) {
             e.printStackTrace();

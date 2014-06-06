@@ -14,4 +14,6 @@ public  class  BasicConstants {
 
     //Vocabulario obtenido
     public static  Vocabulary _vocabulary = new Vocabulary();
+    public static double probpos = 0.0;
+    public static double probneg = 0.0;
 }

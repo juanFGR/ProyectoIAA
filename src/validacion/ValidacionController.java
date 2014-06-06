@@ -103,7 +103,7 @@ public class ValidacionController {
             System.out.println(nameOfCorpus);
             numText = arraylistclasify.size();
             for (int i = 0; i < arraylistclasify.size(); i++) {
-                if (!arraylistclasify.get(i).equals(arraylistclasify.get(i))){
+                if (!arraylistclasify.get(i).equals(arraylistclassifyok.get(i))){
                     conterr++;
                 }//if
             }//for

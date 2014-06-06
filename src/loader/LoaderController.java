@@ -74,6 +74,7 @@ public class LoaderController {
             while((aLine = br.readLine()) != null){
                 vocabulary.addToVocabulary(aLine);
             }
+            //vocabulary.addToVocabulary("<UNKNOWN>");//Añadida palabra desconocida al bocabulario
             vocabulary.printFile(file.getParent());
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,7 +96,7 @@ public class LoaderController {
 
     private void directoryFunctionForLoadCorpus(int typeOfCorpus) {
 
-        String conjunto = "";
+        String conjunto = "", clase = "";
 
         if (typeOfCorpus == TypeOfCorpus.CORPUSPOSITIVE){
             conjunto = "Positive";
@@ -106,7 +107,7 @@ public class LoaderController {
         Stage stage = new Stage();
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Load " + conjunto + " Set");
-        File defaultDirectory = new File("ficheros/");
+        File defaultDirectory = new File("C:/");
         directoryChooser.setInitialDirectory(defaultDirectory);
         File selectedDirectory = directoryChooser.showDialog(stage);
 
@@ -118,15 +119,22 @@ public class LoaderController {
                 String nameOfCorpus = null;
                 if (typeOfCorpus == TypeOfCorpus.CORPUSPOSITIVE){
                     nameOfCorpus = selectedDirectory.getParent() + "\\corpusPos";
+                    clase = "pos";
+                    BasicConstants.probpos = listOfFiles.length;
                 }else if (typeOfCorpus == TypeOfCorpus.CORPUSNEGATIVE){
                     nameOfCorpus = selectedDirectory.getParent() + "\\corpusNeg";
+                    clase = "neg";
+                    BasicConstants.probneg = listOfFiles.length;
                 }
 
                 FileWriter fileWritter = new FileWriter(selectedDirectory.getParent()+ "\\corpusTodo",true);
                 BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-
+                //Creando clasificación ok
+                FileWriter fileWritter2 = new FileWriter(selectedDirectory.getParent()+ "\\clasificacion_OK",true);
+                BufferedWriter bufferWritter2 = new BufferedWriter(fileWritter2);
 
                 PrintWriter writer = new PrintWriter(nameOfCorpus, "UTF-8");
+
 
                 for (int i = 0; i < listOfFiles.length; i++) {
                     File file = listOfFiles[i];
@@ -135,12 +143,19 @@ public class LoaderController {
                             String content = FileUtils.readFileToString(file);
                             writer.println("Texto: " + content);
                             bufferWritter.write("Texto: " + content + "\n");
+                            bufferWritter2.write("Clase: "+ clase + " Texto: " + content + "\n");
 
                         } catch (Exception e){}
                     }
                 }
+                if ((BasicConstants.probpos != 0.0) && (BasicConstants.probneg != 0.0)){
+                    double suma = BasicConstants.probpos + BasicConstants.probneg;
+                    BasicConstants.probpos = Math.log10((double)BasicConstants.probpos/(double) suma);
+                    BasicConstants.probneg = Math.log10((double)BasicConstants.probneg /(double) suma);
+                }
                 writer.close();
                 bufferWritter.close();
+                bufferWritter2.close();
             } catch (Exception e){}
         }
     }
