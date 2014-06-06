@@ -9,24 +9,24 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<GridPane prefHeight="257.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="loader.LoaderController">
-  <children>
-    <Pane fx:id="content" prefHeight="161.0" prefWidth="327.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
-      <children>
-        <Button fx:id="loadPositive" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#LoadPositive" prefHeight="38.0" text="Cargar conjunto positivo" />
-        <Button fx:id="loadNegative" layoutX="14.0" layoutY="82.0" mnemonicParsing="false" onAction="#LoadNegative" prefHeight="38.0" prefWidth="151.0" text="Cargar conjunto negativo" textFill="BLACK" />
-        <ProgressIndicator fx:id="progressPositive" layoutX="225.0" layoutY="33.0" progress="0.0" />
-        <ProgressIndicator fx:id="progressNegative" layoutX="225.0" layoutY="82.0" progress="0.0" />
-        <Button fx:id="generateVocabulary" layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#GenerateVocabulary" prefHeight="38.0" prefWidth="151.0" text="Generar Vocabulario" />
-        <Button layoutX="187.0" layoutY="205.0" minHeight="15.9609375" mnemonicParsing="false" onAction="#gotoAprendizaje" prefHeight="38.0" prefWidth="114.0" text="Aprendizaje" />
-        <ProgressIndicator fx:id="vocabularyLoaded"  layoutX="225.0" layoutY="129.0" progress="0.0" />
-      </children>
-    </Pane>
-  </children>
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-  </rowConstraints>
+<GridPane prefHeight="257.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loader.LoaderController">
+    <children>
+        <Pane fx:id="content" prefHeight="161.0" prefWidth="327.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <children>
+                <Button fx:id="loadPositive" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#LoadPositive" prefHeight="38.0" text="Cargar conjunto positivo" />
+                <Button fx:id="loadNegative" layoutX="14.0" layoutY="82.0" mnemonicParsing="false" onAction="#LoadNegative" prefHeight="38.0" prefWidth="151.0" text="Cargar conjunto negativo" textFill="BLACK" />
+                <ProgressIndicator fx:id="progressPositive" layoutX="225.0" layoutY="33.0" progress="0.0" />
+                <ProgressIndicator fx:id="progressNegative" layoutX="225.0" layoutY="82.0" progress="0.0" />
+                <Button fx:id="generateVocabulary" layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#GenerateVocabulary" prefHeight="38.0" prefWidth="151.0" text="Generar Vocabulario" />
+                <Button layoutX="108.0" layoutY="205.0" minHeight="15.9609375" mnemonicParsing="false" onAction="#gotoAprendizaje" prefHeight="38.0" prefWidth="114.0" text="Aprendizaje" />
+                <ProgressIndicator fx:id="vocabularyLoaded" layoutX="225.0" layoutY="129.0" progress="0.0" />
+            </children>
+        </Pane>
+    </children>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+    </rowConstraints>
 </GridPane>

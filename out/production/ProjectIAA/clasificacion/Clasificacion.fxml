@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane prefHeight="257.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="clasificacion.ClasificacionController">
+<GridPane prefHeight="257.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clasificacion.ClasificacionController">
   <children>
     <Pane fx:id="content" prefHeight="274.0" prefWidth="318.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
@@ -14,7 +14,7 @@
         <ProgressIndicator fx:id="progressLoadCorpus" layoutX="190.0" layoutY="126.0" progress="0.0" />
         <ProgressIndicator fx:id="progressLoadAprendizajePOS" layoutX="190.0" layoutY="18.0" progress="0.0" />
         <ProgressIndicator fx:id="progressLoadAprendizajeNEG" layoutX="190.0" layoutY="69.0" progress="0.0" />
-        <Button onAction="#goToEvaluation" layoutX="203.0" layoutY="216.0" mnemonicParsing="false" text="Evaluacion" />
+        <Button layoutX="124.0" layoutY="214.0" mnemonicParsing="false" onAction="#goToEvaluation" prefHeight="29.0" prefWidth="80.0" text="Evaluacion" />
       </children>
     </Pane>
   </children>

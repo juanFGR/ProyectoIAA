@@ -16,7 +16,7 @@ import java.io.*;
 
 
 /**
- * Created by JuanFGR on 02/05/2014.
+ * Created by JuanFGR & Gonzalo J. García Martín on 02/05/2014.
  */
 public class LoaderController {
 
@@ -64,7 +64,7 @@ public class LoaderController {
 
         try {
             while((aLine = br.readLine()) != null){
-               vocabulary.addToVocabulary(aLine);
+                vocabulary.addToVocabulary(aLine);
             }
 
             vocabulary.printFile(file.getParent());
@@ -90,15 +90,15 @@ public class LoaderController {
 
 
     private void directoryFunctionForLoadCorpus(int typeOfCorpus) {
-    	  
-    	  String conjunto = "";
-    	
-    	  if (typeOfCorpus == TypeOfCorpus.CORPUSPOSITIVE){
-          conjunto = "Positive";
+
+        String conjunto = "";
+
+        if (typeOfCorpus == TypeOfCorpus.CORPUSPOSITIVE){
+            conjunto = "Positive";
         }else if (typeOfCorpus == TypeOfCorpus.CORPUSNEGATIVE){
-          conjunto = "Negative";
+            conjunto = "Negative";
         }
-    	  
+
         Stage stage = new Stage();
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Load " + conjunto + " Set");

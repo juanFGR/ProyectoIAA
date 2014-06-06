@@ -10,6 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        //Definicion de un panel que obtiene la ventana principal d neustro programa
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Proyecto de IAA 2013/2014");
         primaryStage.setScene(new Scene(root, 300, 275));

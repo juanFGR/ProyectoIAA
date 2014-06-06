@@ -19,7 +19,7 @@ import java.util.Set;
 
 
 /**
- * Created by JuanFGR on 02/05/2014.
+ * Created by JuanFGR & Gonzalo J. García Martín on 02/05/2014.
  */
 public class AprendizjeController {
 
@@ -51,11 +51,24 @@ public class AprendizjeController {
         progressNegative.setProgress(100);
     }
 
+    /*protected*/public void LoadVocabulary() {
+        //Cargar vocabulario
+    }
+
     private void loader(int loader) throws FileNotFoundException  {
+
+        String corpus = "";
+        if (loader == TypeOfLoad.LOADCORPUSPOSITIVE) {
+            corpus = "Positive";
+        }
+        else if (loader == TypeOfLoad.LOADCORPUSNEGATIVE) {
+            corpus = "Negative";
+        }
+
         System.out.println(BasicConstants._vocabulary._vocabularyMap.size());
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
+        fileChooser.setTitle("Load " + corpus + " Corpus");
         fileCorpus = fileChooser.showOpenDialog(stage);
 
         FileReader fr = new FileReader(fileCorpus.getAbsolutePath());
@@ -142,7 +155,7 @@ public class AprendizjeController {
             bufferWriterNeg.close();
 
 
-        //try
+            //try
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -152,7 +165,11 @@ public class AprendizjeController {
 
     }
 
-
+    /**
+     *
+     * @param listOfKeys{Set} Conjunto de palabras que contiene nuestro proyecto
+     * @return cont{Integer} devuelve el numero de palabras que contiene el vocabulario
+     * */
     private Integer countWords(Set<String> listOfKeys) {
         int cont=0;
         for (String it:listOfKeys) {
@@ -200,13 +217,6 @@ public class AprendizjeController {
                 bufferWritter.close();
             } catch (Exception e){}
         }
-    }
-
-
-    @FXML
-    protected void LoadNegative(ActionEvent event) {
-        //    directoryFunctionForLoadCorpus(TypeOfCorpus.CORPUSNEGATIVE);
-
     }
 
 }

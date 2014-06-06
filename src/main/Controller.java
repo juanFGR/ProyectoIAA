@@ -13,14 +13,11 @@ import loader.Loader;
 import java.io.IOException;
 
 public class Controller   {
-@FXML Label jj;
-    @FXML
-    Parent root;
+    @FXML Label jj;
+    @FXML Parent root;
 
     @FXML
     protected void ee(ActionEvent event) throws IOException {
-
-
         new Loader();
     }
 }

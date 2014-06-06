@@ -4,22 +4,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane prefHeight="257.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="validacion.ValidacionController">
-  <children>
-    <Pane fx:id="content" prefHeight="175.0" prefWidth="263.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
-      <children>
-        <Button layoutX="25.0" layoutY="129.0" mnemonicParsing="false" onAction="#execCode" prefHeight="38.0" prefWidth="146.0" text="Validar" />
-        <Button layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#LoadClassify" prefHeight="45.0" prefWidth="146.0" text="Cargar Clasifiacion" />
-        <Button layoutX="18.0" layoutY="69.0" minHeight="18.5" mnemonicParsing="false" onAction="#LoadClassify_ok" prefHeight="38.0" prefWidth="146.0" text="Cargar Clasificacion OK" textFill="BLACK" />
-        <ProgressIndicator fx:id="progressLoadAprendizajePOS" layoutX="190.0" layoutY="18.0" progress="0.0" />
-        <ProgressIndicator fx:id="progressLoadAprendizajeNEG" layoutX="190.0" layoutY="69.0" progress="0.0" />
-      </children>
-    </Pane>
-  </children>
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-  </rowConstraints>
+<GridPane prefHeight="257.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="validacion.ValidacionController">
+    <children>
+        <Pane fx:id="content" prefHeight="175.0" prefWidth="263.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <children>
+                <Button layoutX="59.0" layoutY="169.0" mnemonicParsing="false" onAction="#execCode" prefHeight="38.0" prefWidth="146.0" text="Validar" />
+                <Button layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#LoadClassify" prefHeight="45.0" prefWidth="146.0" text="Cargar Clasifiacion" />
+                <Button layoutX="18.0" layoutY="69.0" minHeight="18.5" mnemonicParsing="false" onAction="#LoadClassify_ok" prefHeight="38.0" prefWidth="146.0" text="Cargar Clasificacion OK" textFill="BLACK" />
+                <ProgressIndicator fx:id="progressClassify" layoutX="190.0" layoutY="18.0" progress="0.0" />
+                <ProgressIndicator fx:id="progressClassifyOK" layoutX="190.0" layoutY="69.0" progress="0.0" />
+            </children>
+        </Pane>
+    </children>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+    </rowConstraints>
 </GridPane>

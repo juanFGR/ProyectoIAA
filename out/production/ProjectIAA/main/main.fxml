@@ -19,13 +19,13 @@
    <children>
      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
        <children>
-         <ProgressIndicator layoutX="14.0" layoutY="194.0" prefHeight="42.0" prefWidth="33.0" progress="0.0" />
+         <ProgressIndicator layoutX="240.0" layoutY="175.0" prefHeight="42.0" prefWidth="33.0" progress="0.0" />
          <Label fx:id="jj" layoutX="141.0" layoutY="23.0" text="Proyecto Final" textFill="#0c0099">
            <font>
              <Font size="16.0" />
            </font>
          </Label>
-         <Button fx:id="ee" layoutX="167.0" layoutY="194.0" mnemonicParsing="false" onAction="#ee" text="Entrar" />
+         <Button fx:id="ee" layoutX="151.0" layoutY="183.0" mnemonicParsing="false" onAction="#ee" prefHeight="25.0" prefWidth="56.0" text="Entrar" />
    
        </children>
      </Pane>

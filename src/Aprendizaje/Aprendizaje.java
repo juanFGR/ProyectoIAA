@@ -1,5 +1,7 @@
-package aprendizaje;/**
- * Created by JuanFGR on 02/05/2014.
+package aprendizaje;
+/**
+ * Created by JuanFGR & Gonzalo J. García Martín on 02/05/2014.
+ *
  */
 
 import javafx.fxml.FXMLLoader;
@@ -11,18 +13,14 @@ import java.io.IOException;
 
 public class Aprendizaje {
 
-
-
-
-
-        public Aprendizaje() throws IOException {
+    public Aprendizaje() throws IOException {
 
         Parent root = FXMLLoader.load(AprendizjeController.class.getResource("Aprendizaje.fxml"));
         Stage stage = new Stage();
-        stage.setTitle("APRENDIZAJE");
+        stage.setTitle("Aprendizaje");
         stage.setScene(new Scene(root, 300, 275));
         stage.show();
 
 
-}
+    }
 }

@@ -19,7 +19,7 @@ import java.util.TreeMap;
 
 
 /**
- * Created by JuanFGR on 02/05/2014.
+ * Created by JuanFGR & Gonzalo J. García Martín on 02/05/2014.
  */
 public class ClasificacionController {
 
@@ -98,13 +98,13 @@ public class ClasificacionController {
 
     @FXML
     protected void LoadCorpusandClassify(ActionEvent event) throws FileNotFoundException {
-            System.out.println(BasicConstants._vocabulary._vocabularyMap.size());
+        System.out.println(BasicConstants._vocabulary._vocabularyMap.size());
 
 
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load corpus to classify");
-         fileCorpus = fileChooser.showOpenDialog(stage);
+        fileCorpus = fileChooser.showOpenDialog(stage);
 
         FileReader fr = new FileReader(fileCorpus.getAbsolutePath());
         BufferedReader br = new BufferedReader(fr);

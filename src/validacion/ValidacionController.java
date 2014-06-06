@@ -14,7 +14,7 @@ import java.util.TreeMap;
 
 
 /**
- * Created by JuanFGR on 02/05/2014.
+ * Created by JuanFGR & Gonzalo J. García Martín on 02/05/2014.
  */
 public class ValidacionController {
 
@@ -30,9 +30,9 @@ public class ValidacionController {
     String selectedDirectory;
 
     @FXML    Pane content;
-    @FXML      ProgressIndicator progressLoadAprendizajePOS,progressLoadAprendizajeNEG;
+    @FXML      ProgressIndicator progressClassify,progressClassifyOK;
 
-    File fileCorpus, fileLearnPositive, fileLearnNegative;
+    File fileCorpus, fileClassify, fileClassifyOK;
 
 
 
@@ -41,11 +41,11 @@ public class ValidacionController {
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load Classify");
-        fileLearnPositive = fileChooser.showOpenDialog(stage);
+        fileClassify = fileChooser.showOpenDialog(stage);
 
-        selectedDirectory = fileLearnPositive.getParent();
+        selectedDirectory = fileClassify.getParent();
         System.out.println("--->"+selectedDirectory);
-        FileReader fr = new FileReader(fileLearnPositive.getAbsolutePath());
+        FileReader fr = new FileReader(fileClassify.getAbsolutePath());
         BufferedReader br = new BufferedReader(fr);
         String aLine;
         String [] column;
@@ -59,7 +59,7 @@ public class ValidacionController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        progressLoadAprendizajePOS.setProgress(100);
+        progressClassify.setProgress(100);
 
     }
 
@@ -67,10 +67,10 @@ public class ValidacionController {
     protected void LoadClassify_ok (ActionEvent event)throws FileNotFoundException{
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Load Negative Learning");
-        fileLearnNegative = fileChooser.showOpenDialog(stage);
+        fileChooser.setTitle("Load Classify OK");
+        fileClassifyOK = fileChooser.showOpenDialog(stage);
 
-        FileReader fr = new FileReader(fileLearnNegative.getAbsolutePath());
+        FileReader fr = new FileReader(fileClassifyOK.getAbsolutePath());
         BufferedReader br = new BufferedReader(fr);
         String aLine, column[];
 
@@ -83,13 +83,13 @@ public class ValidacionController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        progressLoadAprendizajeNEG.setProgress(100);
+        progressClassifyOK.setProgress(100);
 
     }
 
     @FXML
     protected void execCode(ActionEvent event) throws FileNotFoundException {
-            System.out.println(BasicConstants._vocabulary._vocabularyMap.size());
+        System.out.println(BasicConstants._vocabulary._vocabularyMap.size());
 
         String aLine, words[], clase;
         int conterr = 0, numText = 0;
@@ -107,13 +107,16 @@ public class ValidacionController {
                     conterr++;
                 }//if
             }//for
-            writer.println("Rendimiento del sistema: " + (double)conterr/(double)numText);
+            double error = ((double)conterr/(double)numText) * 100;
+            double rendimiento = (1 - ((double)conterr/(double)numText)) * 100;
+            writer.println("Error del sistema: " + error + "%");
+            writer.println("Rendimiento del sistema: " + rendimiento + "%");
             writer.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        progressLoadAprendizajePOS.setProgress(100);
+        progressClassify.setProgress(100);
 
     }
 
