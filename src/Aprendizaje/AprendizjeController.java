@@ -9,7 +9,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import loader.LoaderController;
 import loader.Vocabulary;
 import main.BasicConstants;
 import org.apache.commons.io.FileUtils;
@@ -19,7 +18,16 @@ import java.util.Set;
 
 
 /**
- * Created by JuanFGR & Gonzalo J. García Martín on 02/05/2014.
+ * @author  Created by JuanFGR & Gonzalo J. García Martín on 02/05/2014.
+ *
+ * La estimación de las probabilidades se escribirá en un fichero de texto llamado aprendizaje<pos o neg>.txt.
+ * En el fichero de texto debe aparecer:
+ *          Cabecera: Numero de documentos del corpus :<número entero> Número de palabras del corpus:<número entero>
+ *
+ * Por cada palabra de vocabulario.txt,  su frecuencia en el corpus y una estimación del logaritmo de su probabilidad
+ * mediante suavizado laplaciano con tratamiento de palabras desconocidas. Las palabras en los ficheros de aprendizaje
+ * estarán ordenadas alfabéticamente.
+ *          Palabra:<cadena> Frec:<número entero> LogProb:<número real>
  */
 public class AprendizjeController {
 
@@ -29,15 +37,15 @@ public class AprendizjeController {
         public static final int LOADVOCABULARY = 2;
     }
 
-
     Vocabulary TreemapForcorpus_Pos = new Vocabulary();
     Vocabulary TreemapForcorpus_Neg = new Vocabulary();
+    File fileCorpus;
 
+    //Elemento definidos en la vista para los cuales el ocntrolador tendra acceso
     @FXML    Pane content;
     @FXML    Button loadNegative,generateVocabulary;
-
     @FXML ProgressIndicator progressPositive,progressNegative;
-    File fileCorpus;
+
 
     @FXML
     protected void LoadPCorpusPOS(ActionEvent event) throws FileNotFoundException {
@@ -51,9 +59,7 @@ public class AprendizjeController {
         progressNegative.setProgress(100);
     }
 
-    /*protected*/public void LoadVocabulary() {
-        //Cargar vocabulario
-    }
+
 
     private void loader(int loader) throws FileNotFoundException  {
 
@@ -88,8 +94,10 @@ public class AprendizjeController {
 
     }
 
-
-
+    @FXML
+    protected void LoadVocabulary(ActionEvent event)throws IOException {
+        //Cargar vocabulario
+    }
 
     @FXML
     protected void goToClasificacion(ActionEvent event)throws IOException{
@@ -178,6 +186,18 @@ public class AprendizjeController {
         return cont;
     }
 
+
+
+
+
+
+
+
+
+
+    /**
+     * @deprecated Function deprecated
+     * */
     private void directoryFunctionForLoadCorpus(int typeOfCorpus) {
         Stage stage = new Stage();
         DirectoryChooser directoryChooser = new DirectoryChooser();

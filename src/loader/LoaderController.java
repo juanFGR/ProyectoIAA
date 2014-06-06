@@ -11,12 +11,20 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.BasicConstants;
 import org.apache.commons.io.FileUtils;
-
 import java.io.*;
 
 
 /**
- * Created by JuanFGR & Gonzalo J. García Martín on 02/05/2014.
+ * @author Created by JuanFGR & Gonzalo J. García Martín on 02/05/2014.
+ *
+ *   Crea un corpus con nombre corpus<pos o neg>.txt que una todos los documentos
+ * con opinión positiva y otro corpus con todos los documentos con opinión negativa.
+ *   Cada línea del fichero de salida en el corpus debe tener la siguiente estructura:
+ *          Texto:<cadena con texto del fichero>
+ *
+ *   Para ello examina el fichero corpustodo.txt y  obtén las palabras del vocabulario a partir del texto.
+ *      Debes generar un fichero de salida vocabulario.txt con cabecera
+ *      Numero de palabras:<Número entero> Palabra:<cadena>
  */
 public class LoaderController {
 
@@ -66,11 +74,7 @@ public class LoaderController {
             while((aLine = br.readLine()) != null){
                 vocabulary.addToVocabulary(aLine);
             }
-
             vocabulary.printFile(file.getParent());
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }

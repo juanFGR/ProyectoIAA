@@ -20,6 +20,13 @@ import java.util.TreeMap;
 
 /**
  * Created by JuanFGR & Gonzalo J. García Martín on 02/05/2014.
+ * En esta parte se clasificarán los documentos presentes en un corpus.
+ *
+ * Escribe un programa que tome como entrada las estimaciones de probabilidad de cada palabra y un corpus con documentos
+ * a clasificar y devuelva los documentos clasificados en un fichero clasificación.txt donde cada línea del fichero de
+ * salida con el corpus tenga la siguiente estructura:
+ *
+ *       Clase:<pos o neg> Texto:<cadena con texto del fichero>
  */
 public class ClasificacionController {
 
